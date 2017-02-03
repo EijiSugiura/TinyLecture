@@ -20,11 +20,9 @@ int main(int argc, char* argv[])
   boost::sort(v);
   for_each(begin(v), end(v), [](path &x){
       ifstream ifs(x.filename().string());
-      string buf;
-      int counter = 0;
-      while(getline(ifs,buf)) {
-	++counter;
-      }
+      ifs.unsetf(ios_base::skipws);
+      int counter = count(istream_iterator<char>(ifs),
+			  istream_iterator<char>(),'\n');
       cout << x << " " << counter << endl;
     });
   return 0;
