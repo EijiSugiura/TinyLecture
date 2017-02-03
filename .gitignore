@@ -1,3 +1,9 @@
+# Data directory
+data
+
+# Backup files
+*~
+
 # Compiled Object files
 *.slo
 *.lo
