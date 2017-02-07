@@ -3,8 +3,9 @@
 use strict;
 
 opendir(my $DIR,".");
-
 my @files = readdir($DIR);
+closedir($DIR);
+
 @files = grep(/.*\.csv$/,@files);
 @files = sort(@files);
 
@@ -17,5 +18,5 @@ foreach my $filename ( @files ){
     close($FILE);
     print "$filename,$counter\n";
 }
-closedir($DIR);
+
 exit(0);
