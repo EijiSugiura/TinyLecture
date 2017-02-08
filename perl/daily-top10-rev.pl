@@ -3,9 +3,9 @@
 use strict;
 
 opendir(my $DIR,".");
-foreach my $filename ( sort( grep(/.*\.csv.xz$/, readdir($DIR) ) ) ){
+foreach my $filename ( sort( grep(/.*\.csv$/, readdir($DIR) ) ) ){
     my %counter;
-    open(my $FILE,"xz -dc $filename |");
+    open(my $FILE,$filename);
     while(my $line = <$FILE>) {
 	my ($name,$rev) = (split(/,/, $line))[6,9];
 	++$counter{$name.','.$rev};
