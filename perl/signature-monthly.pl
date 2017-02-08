@@ -12,8 +12,9 @@ foreach my $filename ( sort( grep(/.*\.csv\.xz$/, readdir($DIR) ) ) ){
 #foreach my $filename ( sort( grep(/.*\.csv$/, readdir($DIR) ) ) ){
 #    open(my $FILE,$filename);
     
-    while(my $line = grep(/$SIGNATURE/,<$FILE>)) {
-	my $date = (split(/,/, $line))[0];
+    my $date;
+    foreach my $line (grep(/$SIGNATURE/,<$FILE>)) {
+	$date = (split(/,/, $line))[0];
 	$date = (split(/\s/,$date))[0];
 	++$counter{$date};
     }
