@@ -1,0 +1,13 @@
+library("data.table")
+library("dplyr")
+library("ggplot2")
+library("stringr")
+
+setwd("~/IDS2016/trigger")
+x <- rbindlist( lapply(list.files(pattern = "trigger-2016[0-1][0-9].csv"), fread))
+setnames(x,c("Date","Hostname","Description"))
+x$Date <- as.Date(x$Date,format="%Y-%m-%d %H:%M:%S")
+daily <- as.data.table(x %>% group_by(Date) %>% summarize(n = n()))
+g <- ggplot(daily, aes(x=Date,y=n))
+g <- g + geom_line()
+plot(g)
